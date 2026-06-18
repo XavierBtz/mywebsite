@@ -1177,3 +1177,54 @@ body {
         margin-bottom: 10px;
     }
 }
+
+/* --- RESPONSIVE OVERRIDES FOR SMALL SCREENS --- */
+@media (max-width: 992px) {
+
+    /* 1. Fix the Navigation Bar */
+    nav,
+    .navbar-container {
+        flex-direction: column;
+        /* Stacks the links vertically or lets them wrap */
+        gap: 15px;
+        text-align: center;
+    }
+
+    /* 2. Fix the "Self-Taught Grind" Section Columns */
+    .grind-section-container {
+        display: flex;
+        flex-direction: column;
+        /* Forces layout from side-by-side to stacked */
+        align-items: center;
+    }
+
+    /* 3. Stop the "13" and "19" Milestones from smashing into text */
+    .milestone-number,
+    .year-bg-text {
+        position: relative !important;
+        /* Pulls them out of absolute overlapping mode */
+        font-size: 4rem !important;
+        /* Scales down the massive size */
+        left: 0 !important;
+        top: 0 !important;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+}
+
+/* --- Mobile Vinyl Scaling --- */
+@media (max-width: 480px) {
+
+    /* Shrink the master outer frame holding the vinyl */
+    .vinyl-deck-wrapper {
+        width: 260px !important;
+        height: 260px !important;
+        margin: 1rem auto !important;
+    }
+
+    /* Shrink the inner center sticker so it stays proportional */
+    .vinyl-center-label {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
