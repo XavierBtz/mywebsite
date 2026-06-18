@@ -1294,7 +1294,7 @@ body {
 /* ==========================================================================
    THE ULTIMATE MOBILE FIX (Replaces all previous attempts)
    ========================================================================== */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
 
     /* 1. STACK EVERYTHING VERTICALLY (Text on top, Vinyl on bottom) */
     .hero,
