@@ -1,0 +1,227 @@
+/* Core Reset & Variables */
+:root {
+    --bg-dark: #0a0a0a;
+    --card-bg: rgba(15, 15, 15, 0.75);
+    --text-white: #ffffff;
+    --text-muted: #8a8a8a;
+    --gold-linear: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 100%);
+    --gold-solid: #d4af37;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Background Treatments mimicking image_2bf7b5.jpg but darker */
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    filter: brightness(0.35) contrast(1.1);
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.6) 0%, rgba(5, 5, 5, 0.9) 100%);
+    z-index: -1;
+}
+
+/* Sleek Glassmorphism Card Box */
+.login-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 100%;
+    max-width: 520px;
+    padding: 3.5rem 3rem;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Typography Remake */
+.studio-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 4px;
+    background: var(--gold-linear);
+
+    /* Add the standard property below the webkit one */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.studio-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    font-weight: 300;
+    margin-bottom: 3rem;
+}
+
+/* Premium Floating Input Fields */
+.login-form {
+    width: 100%;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animated label transition */
+.input-group input:focus~label,
+.input-group input:not(:placeholder-shown)~label {
+    top: -1.2rem;
+    font-size: 0.75rem;
+    color: var(--gold-solid);
+    letter-spacing: 2px;
+}
+
+.input-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background: var(--gold-linear);
+    transition: width 0.4s ease;
+}
+
+.input-group input:focus~.input-bar {
+    width: 100%;
+}
+
+/* Premium Interactive Gold Button */
+.enter-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--gold-solid);
+    padding: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.enter-btn span {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-white);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s ease;
+}
+
+.enter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gold-linear);
+    z-index: 1;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover States */
+.enter-btn:hover::before {
+    left: 0;
+}
+
+.enter-btn:hover span {
+    color: #000000;
+    font-weight: 600;
+}
+
+.enter-btn:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Styling for the new Photo Logo */
+.custom-logo-photo {
+    /* size constraint so it fits the aesthetic above the title */
+    max-width: 100px;
+    max-height: 100px;
+
+    height: auto;
+    /* maintain aspect ratio */
+
+    /* adds a sleek gold 'accent' glow around your photo logo */
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+
+    /* adds a subtle, smooth animation on hover */
+    transition: all 0.3s ease;
+
+    /* dims it slightly to fit the dark tones, highlights on hover */
+    opacity: 0.9;
+}
+
+/* Slick hover effect for the logo */
+.logo-wrapper:hover .custom-logo-photo {
+    transform: scale(1.05);
+    /* slightly scale up */
+    opacity: 1;
+    /* full opacity */
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+    /* enhance the glow */
+}

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/my_logo_nobg.png') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About // Nathaniel Cassian Xavier</title>
+    <!-- Premium Google Fonts Link -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-pure: #000000;
+            --bg-card: #0a0a0a;
+            --gold: #dfb75c;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
+            --text-white: #ffffff;
+            --text-muted: #8e8e8e;
+            --border-glow: rgba(212, 175, 55, 0.1);
+        }
+
+        /* ==========================================================================
+           ABOUT PAGE: CINEMATIC GOLD RESONANCE MESH
+           ========================================================================== */
+
+        html {
+            background-color: #030303 !important;
+            /* Slightly lifted off absolute pitch black */
+        }
+
+        body {
+            background: transparent !important;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* The Resonating Backdrop Engine */
+        .about-gold-resonance-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Locks behind your biography content text boxes */
+            pointer-events: none;
+
+            /* Multi-angle golden exposure points to wash out the harsh blacks */
+            background:
+                radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.26) 0%, transparent 55%),
+                radial-gradient(circle at 85% 75%, rgba(179, 135, 40, 0.20) 0%, transparent 60%),
+                radial-gradient(circle at 50% 45%, rgba(252, 246, 186, 0.08) 0%, transparent 50%);
+
+            transform: translateZ(0);
+            /* Animates both the physical placement and the glowing intensity */
+            animation: atmosphericWarmth 15s ease-in-out infinite alternate;
+        }
+
+        /* Kinetic Pulse & Exposure Loop */
+        @keyframes atmosphericWarmth {
+            0% {
+                transform: scale(1.0) translate(0px, 0px);
+                filter: brightness(0.9) contrast(1.0);
+            }
+
+            50% {
+                transform: scale(1.12) translate(25px, -15px);
+                filter: brightness(1.3) contrast(1.15);
+                /* Background literally glows deeper mid-cycle */
+            }
+
+            100% {
+                transform: scale(0.95) translate(-10px, 10px);
+                filter: brightness(0.85) contrast(0.95);
+            }
+        }
+
+        .about-page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 2;
+            /* Sits sharply on top of the moving background */
+        }
+
+        .back-nav {
+            margin-bottom: 5rem;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .back-link:hover {
+            color: var(--text-white);
+            transform: translateX(-4px);
+        }
+
+        .story-section {
+            margin-bottom: 8rem;
+        }
+
+        .gold-span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        /* SECTION 1: HERO OVERVIEW */
+        .story-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            margin: 0 0 1rem 0;
+            line-height: 1.15;
+        }
+
+        .story-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .story-text p {
+            color: var(--text-muted);
+            line-height: 1.9;
+            font-size: 0.95rem;
+            margin-bottom: 1.8rem;
+            font-weight: 200;
+        }
+
+        .story-text p.highlight {
+            color: var(--text-white);
+            font-size: 1.25rem;
+            line-height: 1.7;
+            font-weight: 300;
+            border-left: 2px solid var(--gold);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* UPDATED: Darker & Sharper Image Processing Matrix */
+        .profile-photo-frame {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background-image: url('/static/images/me.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+
+            /* Pulls down exposure, increases high-end contrast crispness */
+            filter: brightness(0.60) contrast(1.45) saturate(0.90);
+            image-rendering: -webkit-optimize-contrast;
+            /* Extra hardware level edge sharpening */
+
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .profile-photo-frame:hover {
+            /* Gently catches a bit more light when user interacts with it */
+            border-color: var(--gold);
+            filter: brightness(0.75) contrast(1.40) saturate(1.0);
+            transform: translateY(-4px);
+        }
+
+        .luxury-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07) 20%, rgba(255, 255, 255, 0.07) 80%, transparent);
+            margin: 6rem 0;
+        }
+
+        /* SECTION 2: CHRONICLES */
+        .chronicle-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+        }
+
+        .stat-sidebar {
+            position: sticky;
+            top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .stat-box {
+            border-left: 1px solid var(--border-glow);
+            padding-left: 1.5rem;
+        }
+
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        .chronicle-content h2,
+        .inspirations-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* SECTION 3: INSPIRATIONS GRID */
+        .inspirations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .pillar-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pillar-card:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px);
+            background-color: #0d0d0d;
+        }
+
+        .pillar-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .pillar-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-weight: 200;
+        }
+
+        @media (max-width: 768px) {
+
+            .intro-grid,
+            .chronicle-grid,
+            .inspirations-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .story-header h1 {
+                font-size: 2.4rem;
+            }
+
+            .about-page-container {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        .audio-status-widget {
+            position: fixed;
+            bottom: 2rem;
+            left: 2.5rem;
+            /* Tucked cleanly out of the way */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 8px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 999;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .audio-status-widget:hover {
+            border-color: rgba(230, 126, 34, 0.2);
+            background: rgba(15, 15, 15, 0.8);
+        }
+
+        #audio-widget-text {
+            font-size: 0.65rem;
+            color: #7a7a7a;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        /* Animated Soundwave Line Columns */
+        .visualizer-bar {
+            width: 2px;
+            height: 12px;
+            background-color: #7a7a7a;
+            transition: all 0.3s ease;
+        }
+
+        /* When active, trigger kinetic pulse loops */
+        .audio-status-widget.playing .visualizer-bar {
+            background-color: #dfb75c;
+            /* Shifts to gold when playing */
+            animation: soundWavePulse 1.2s ease-in-out infinite alternate;
+        }
+
+        .audio-status-widget.playing .bar1 {
+            animation-delay: 0.1s;
+        }
+
+        .audio-status-widget.playing .bar2 {
+            animation-delay: 0.4s;
+            height: 16px;
+        }
+
+        .audio-status-widget.playing .bar3 {
+            animation-delay: 0.2s;
+        }
+
+        .audio-status-widget.playing #audio-widget-text {
+            color: #ffffff;
+        }
+
+        @keyframes soundWavePulse {
+            0% {
+                transform: scaleY(0.4);
+            }
+
+            100% {
+                transform: scaleY(1.2);
+            }
+        }
+    </style>
+</head>
+<audio id="studio-bg-audio" loop src="static/slow-ambient.mp3"></audio>
+<div class="audio-status-widget" onclick="toggleAudioExplicitly()">
+    <div class="visualizer-bar bar1"></div>
+    <div class="visualizer-bar bar2"></div>
+    <div class="visualizer-bar bar3"></div>
+    <span id="audio-widget-text">AMBIENT: OFF</span>
+</div>
+
+<body>
+
+    <body>
+
+        <div class="about-gold-resonance-bg"></div>
+
+        <main class="about-page-container">
+
+            <!-- BACK NAV -->
+            <nav class="back-nav">
+                <a href="{{ url_for('studio') }}" class="back-link">← Return to Studio</a>
+            </nav>
+
+            <!-- SECTION 1: HERO OVERVIEW -->
+            <section class="story-section intro-section">
+                <div class="story-header">
+                    <h1>ANALOG VIBES IN A<br><span class="gold-span">DIGITAL ERA</span></h1>
+                    <h2>Nathaniel Cassian Xavier</h2>
+                </div>
+
+                <div class="intro-grid">
+                    <div class="story-text">
+                        <p class="highlight">I am an upcoming independent producer. I'm not a multi-million dollar or
+                            multi-award winning artist—yet. I'm building, networking, and growing the sound block by
+                            block.
+                        </p>
+                        <p>Music captured me when I was just 3 years old, igniting a lifelong fascination with rhythm
+                            and
+                            composition. That early spark evolved into an obsession with the acoustic guitar, an
+                            instrument
+                            that eventually paved my entry path into modern structural audio design.</p>
+                        <p>Today, working under the moniker Xavier Beats, I architect textured chillout zones for a
+                            global
+                            audience, bridging the gap between hardware-driven live instrumentation and raw digital
+                            engineering.</p>
+                    </div>
+
+                    <!-- PHOTO FRAME WITH TARGETED DARK/SHARP FILTERS -->
+                    <div class="profile-photo-frame"></div>
+                </div>
+            </section>
+
+            <div class="luxury-divider"></div>
+
+            <!-- SECTION 2: GENESIS CHRONICLES -->
+            <section class="story-section origin-section">
+                <div class="chronicle-grid">
+
+                    <div class="stat-sidebar">
+                        <div class="stat-box">
+                            <div class="stat-number">13</div>
+                            <div class="stat-label">Years Old<br>Borrowed My Dad's Laptop</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">19</div>
+                            <div class="stat-label">Years of Age<br>Current Studio Era</div>
+                        </div>
+                    </div>
+
+                    <div class="chronicle-content">
+                        <h2>THE SELF-TAUGHT GRIND</h2>
+                        <p class="story-text">Everything changed at age 13. Armed with my dad's laptop, I locked myself
+                            in
+                            and taught myself the intricate systems of modern music production. In that exact same year,
+                            I
+                            picked up a guitar and completely taught myself how to play, merging live strings with
+                            electronic structures.</p>
+                        <p class="story-text">My journey started with heavy, rhythmic trap beats, sharing my
+                            developments
+                            directly with listeners on my YouTube channel. That foundational era taught me the science
+                            of
+                            crisp drum design, heavy low-frequency management, and competitive arrangement techniques.
+                        </p>
+                        <p class="story-text">Now, at 19 years old (and turning 20 next year), that foundation supports
+                            full-length lofi albums streaming live on Spotify. The objective is clear: network, elevate
+                            the
+                            composition quality daily, and break into the industry's premier curated playlists.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="luxury-divider"></div>
+
+            <!-- SECTION 3: INSPIRATIONS MATRIX -->
+            <section class="story-section inspirations-section">
+                <h2>SONIC INSPIRATIONS</h2>
+                <p class="story-text" style="max-width: 600px;">The production language of Xavier Beats is built on the
+                    pillars of legendary hip-hop mentors, YouTube tech-creators, and underground chillout curators:</p>
+
+                <div class="inspirations-grid">
+
+                    <!-- INSPIRATION 1 -->
+                    <div class="pillar-card">
+                        <h3>FOUNDATIONAL HITMAKERS</h3>
+                        <p><strong>Timbaland & Simon Servida.</strong> Masters of rhythmic unexpectedness and complex
+                            bouncing structures. They shaped my understanding of how to make drums dance and pop within
+                            a
+                            clean sonic stereo image.</p>
+                    </div>
+
+                    <!-- INSPIRATION 2 -->
+                    <div class="pillar-card">
+                        <h3>MODERN PRODUCTION CULTURE</h3>
+                        <p><strong>Prod by Ocean & Kyle Beats.</strong> The driving forces that demystified the creative
+                            process. Their structural formatting and entrepreneurial drive showed me how an upcoming
+                            producer can establish a definitive digital footprint from their bedroom.</p>
+                    </div>
+
+                    <!-- INSPIRATION 3 -->
+                    <div class="pillar-card">
+                        <h3>THE LOFI TRANSITION</h3>
+                        <p><strong>L.dre & Mondo Loops.</strong> The direct catalysts who opened my ears to the cozy
+                            world
+                            of chill lofi beats. Their brilliant blends of jazzy, nostalgic atmospheric chords and vinyl
+                            warmth made me pivot toward creating relaxing chillout albums.</p>
+                    </div>
+
+                    <!-- INSPIRATION 4 -->
+                    <div class="pillar-card">
+                        <h3>THE ACOUSTIC FRAMEWORK</h3>
+                        <p><strong>Self-Taught Strings.</strong> My deep love for the guitar since childhood acts as my
+                            secret weapon. Infusing organic, self-played guitar melodies straight into my digital
+                            layouts
+                            keeps the music human, soulful, and distinct.</p>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+        <script>
+            const studioAudio = document.getElementById('studio-bg-audio');
+            const audioWidget = document.querySelector('.audio-status-widget');
+            const audioText = document.getElementById('audio-widget-text');
+
+            // Lower the default volume to 30% so it acts as gentle, warm background wallpaper music
+            studioAudio.volume = 0.3;
+
+            // AUTOMATION APPARATUS: Triggers audio instantly on the user's very first click anywhere on screen
+            function autoPlayEngine() {
+                if (studioAudio.paused) {
+                    startAudioEffects();
+                }
+                // Immediately removes the listener so future clicks aren't messing with the playback loop
+                document.removeEventListener('click', autoPlayEngine);
+            }
+            document.addEventListener('click', autoPlayEngine);
+
+            function startAudioEffects() {
+                studioAudio.play().then(() => {
+                    audioWidget.classList.add('playing');
+                    audioText.innerText = "AMBIENT: ON";
+                }).catch(err => console.log("Autoplay waiting for custom gesture input event..."));
+            }
+
+            // MANUAL CONTROL: Allows user to click the widget in the corner to toggle sound anytime
+            function toggleAudioExplicitly() {
+                if (studioAudio.paused) {
+                    startAudioEffects();
+                } else {
+                    studioAudio.pause();
+                    audioWidget.classList.remove('playing');
+                    audioText.innerText = "AMBIENT: MUTED";
+                }
+            }
+        </script>
+    </body>
+
+</html>

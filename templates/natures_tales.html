@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/my_logo_nobg.png') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xavier Beats // Album Spotlight</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-pure: #000000;
+            --bg-card: rgba(12, 12, 12, 0.85);
+            /* Slightly translucent to see the background photo */
+            --gold: #dfb75c;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
+            --orange: #e67e22;
+            --text-white: #ffffff;
+            --text-muted: #7a7a7a;
+        }
+
+        /* ==========================================================================
+           FIXED STACKING LAYER PLATFORM (CRITICAL IMAGE PATCH)
+           ========================================================================== */
+
+        html {
+            /* Keep the ultimate base absolute pitch black */
+            background-color: #000000 !important;
+        }
+
+        body {
+            /* Make body clear so the photo layer doesn't get choked out */
+            background: transparent !important;
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* LAYER 1: The Low-Exposure Full-Screen Backdrop Photo */
+        /* LAYER 1: The Upgraded Full-Screen Backdrop Photo */
+        /* UPDATED: Hardware-Accelerated Interactive Photo Layer */
+        .album-bg-photo-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/images/image_2bf7b5.jpg');
+            /* Flask path fallback: url('/static/studio-bg.jpg') */
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            z-index: 1;
+
+            /* Enhanced exposure and contrast matrix */
+            filter: brightness(0.42) contrast(1.25) saturate(0.95);
+
+            /* NEW: Slightly oversized to prevent edge clipping during movement */
+            transform: scale(1.05) translate(0px, 0px);
+
+            /* NEW: Creates a liquid-smooth lag effect so it glides instead of snapping */
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+
+        /* LAYER 2: The Slow-Motion Light Aura Layer overlaying the image */
+        .ambient-glow-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(230, 126, 34, 0.08) 0%, transparent 60%);
+            transform: translateZ(0);
+            animation: atmosphericBreathe 22s ease-in-out infinite alternate;
+
+            /* Sits perfectly over the photo layer */
+            z-index: 2;
+        }
+
+        /* LAYER 3: Main Layout content container sitting crisply above the atmosphere templates */
+        .album-page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 5rem;
+            align-items: center;
+            min-height: 80vh;
+
+            /* Forces all text, links, and player widgets to stay above background variables */
+            z-index: 3;
+        }
+
+        .player-showcase-zone {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .meta-category {
+            font-size: 0.75rem;
+            color: var(--orange);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .album-main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin: 0.5rem 0 2rem 0;
+            text-transform: uppercase;
+        }
+
+        /* Translucent Spotify Widget Frame Shell */
+        .spotify-embed-container {
+            width: 100%;
+            background-color: var(--bg-card);
+            backdrop-filter: blur(8px);
+            /* Lets the studio background faintly blur underneath */
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            box-sizing: border-box;
+            transition: border-color 0.4s ease;
+        }
+
+        .spotify-embed-container:hover {
+            border-color: rgba(230, 126, 34, 0.2);
+        }
+
+        .spotify-embed-container iframe {
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Chambers-Inspired Command Menu */
+        .chambers-nav-panel {
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            padding-left: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .brand-signature {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            margin-bottom: 3.5rem;
+            color: var(--text-white);
+        }
+
+        .chambers-menu-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .chambers-nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 0.5rem 0;
+        }
+
+        .chambers-nav-link span {
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            color: var(--gold);
+        }
+
+        .chambers-nav-link:hover {
+            color: var(--text-white);
+            padding-left: 8px;
+        }
+
+        .chambers-nav-link:hover span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .chambers-nav-link.logout-action:hover {
+            color: #ff4d4d;
+        }
+
+        .chambers-nav-link.logout-action:hover span {
+            color: #ff4d4d;
+        }
+
+        @media (max-width: 900px) {
+            .album-page-wrapper {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                padding: 4rem 1.5rem;
+            }
+
+            .chambers-nav-panel {
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                padding-left: 0;
+                padding-top: 3rem;
+            }
+
+            .album-main-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* ==========================================================================
+   ALBUM COMMENTS DECK LAYOUT & FOCUS STATES
+   ========================================================================== */
+        .discussion-board-zone {
+            margin-top: 8rem !important;
+            margin-bottom: 8rem !important;
+        }
+
+        .discussion-header {
+            margin-bottom: 3rem;
+        }
+
+        .discussion-label {
+            font-size: 0.75rem;
+            color: #dfb75c;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .discussion-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-top: 0;
+        }
+
+        /* Form Box Architecture */
+        .comment-input-box {
+            background-color: #0c0c0c;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-group-row {
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        /* Premium Dark Input Fields */
+        .studio-input-field {
+            width: 100%;
+            background-color: #030303;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            padding: 1.1rem 1.3rem;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        .studio-textarea {
+            min-height: 120px;
+            resize: vertical;
+            /* Allows desktop tracking control safely */
+            line-height: 1.6;
+        }
+
+        /* Glowing Aura on Focus Click */
+        .studio-input-field:focus {
+            outline: none;
+            border-color: rgba(212, 175, 55, 0.5);
+            background-color: #060606;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.04);
+        }
+
+        /* Luxury Post Button */
+        .form-action-row {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .post-comment-btn {
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #dfb75c;
+            padding: 1rem 2.2rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .post-comment-btn .btn-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .post-comment-btn:hover {
+            background-color: #dfb75c;
+            color: #000000;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+        }
+
+        .post-comment-btn:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* ==========================================================================
+   STREAM ARCHITECTURE (PREVENTING WORD OVERFLOWS)
+   ========================================================================== */
+        .comment-card {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 2rem 0;
+            word-wrap: break-word;
+            /* Forces safety clips on super long chaotic strings on smartphones */
+        }
+
+        .comment-card:last-child {
+            border-bottom: none;
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+            /* Collapses info into stack rows safely on mobile viewports */
+            gap: 0.5rem;
+        }
+
+        .comment-author {
+            color: #dfb75c;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .comment-date {
+            color: #4a4a4a;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .comment-body {
+            color: #a5a5a5;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Responsive Fluid Overrides */
+        @media (max-width: 600px) {
+            .comment-input-box {
+                padding: 1.5rem;
+            }
+
+            .post-comment-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .discussion-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NEW: The Low-Exposure Full-Screen Picture Backdrop -->
+    <div class="album-bg-photo-layer"></div>
+
+    <!-- The Slow-Motion Light Aura Layer -->
+    <div class="ambient-glow-layer"></div>
+
+    <!-- Main Content Grid -->
+    <main class="album-page-wrapper">
+
+        <!-- LEFT PANEL: PLAYER DISP -->
+        <section class="player-showcase-zone">
+            <header>
+                <p class="meta-category">Now Exhibiting</p>
+                <!-- Change this text per page -->
+                <h1 class="album-main-title">Nature's Tales</h1>
+            </header>
+
+            <div class="spotify-embed-container">
+                <!-- Remember to update this album embed link for stargazing.html -->
+                <iframe data-testid="embed-iframe" style="border-radius:12px"
+                    src="https://open.spotify.com/embed/album/0K9NdVXYyPtiP2J8HuAIb2?utm_source=generator&theme=0&si=fec7ef0716c24341"
+                    width="100%" height="352" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+        </section>
+
+
+        <!-- RIGHT PANEL: COMMAND LINES (Links pointing home or to logout routes) -->
+        <aside class="chambers-nav-panel">
+            <div class="brand-signature">XAVIER BEATS</div>
+
+            <nav class="chambers-menu-group">
+                <!-- Return Home -->
+                <a href="{{ url_for('studio') }}" class="chambers-nav-link">
+                    Return to Studio <span>&gt;</span>
+                </a>
+
+                <!-- Read Bio -->
+                <a href="{{ url_for('curator') }}" class="chambers-nav-link">
+                    Read Biography <span>&gt;</span>
+                </a>
+
+                <!-- Route Log Out execution -->
+                <a href="{{ url_for('login') }}" class="chambers-nav-link logout-action">
+                    Log Out / Exit <span>&gt;</span>
+                </a>
+            </nav>
+        </aside>
+        <section class="studio-layout-container discussion-board-zone">
+
+            <div class="discussion-header">
+                <p class="discussion-label">Community Echo</p>
+                <h2 class="discussion-title">ALBUM DISCUSSION</h2>
+            </div>
+
+            <div class="stats">
+                <p>Total Visitors: {{ visitor_count }}</p>
+            </div>
+
+            <div class="comment-input-box">
+                <form action="/post_comment" method="POST" class="comment-form">
+                    <input type="hidden" name="album_name" value="natures_tales">
+
+                    <div class="input-group-row">
+                        <input type="text" name="name" placeholder="YOUR NAME" required class="studio-input-field">
+                    </div>
+
+                    <div class="input-group-row">
+                        <textarea name="text"
+                            placeholder="Share your atmosphere notes, favorite tracks, or production feedback..."
+                            required class="studio-input-field studio-textarea"></textarea>
+                    </div>
+
+                    <div class="form-action-row">
+                        <button type="submit" class="post-comment-btn">
+                            <span>POST ENTRY</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="comments-section">
+                {% for comment in comments %}
+                <div class="comment-bubble">
+                    <strong>{{ comment.name }}</strong>
+                    <p>{{ comment.text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
+<!-- INTERACTIVE BACKGROUND MOTOR -->
+<script>
+    document.addEventListener('mousemove', (event) => {
+        const bgPhoto = document.querySelector('.album-bg-photo-layer');
+
+        if (bgPhoto) {
+            // Calculates cursor displacement relative to the exact center of the screen
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const mouseX = event.clientX - centerX;
+            const mouseY = event.clientY - centerY;
+
+            // Change these decimals (0.015) to make the shift more or less obvious
+            const moveX = mouseX * 0.015;
+            const moveY = mouseY * 0.015;
+
+            // Dynamically updates the GPU matrix pipeline
+            bgPhoto.style.transform = `scale(1.05) translate(${moveX}px, ${moveY}px)`;
+        }
+    });
+    // TEMPORARY INTERACTIVE ENGINE (Visual Test Only)
+    function handleMockSubmit(event) {
+        event.preventDefault(); // Keeps the screen from reloading automatically
+
+        const nameField = document.getElementById('commenter-name');
+        const textField = document.getElementById('comment-text');
+        const streamContainer = document.getElementById('comments-stream');
+
+        // Generate current timestamp on-the-fly
+        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const timestamp = new Date().toLocaleDateString('en-US', options).replace(',', ' //');
+
+        // Render dynamic element layout card template
+        const newCommentHTML = `
+            <div class="comment-card" style="animation: fadeInComment 0.6s ease forward;">
+                <div class="comment-meta">
+                    <span class="comment-author">${escapeHtml(nameField.value)}</span>
+                    <span class="comment-date">${timestamp}</span>
+                </div>
+                <p class="comment-body">${escapeHtml(textField.value)}</p>
+            </div>
+        `;
+
+        // Prepend directly to the peak of the forum list stack
+        streamContainer.insertAdjacentHTML('afterbegin', newCommentHTML);
+
+        // Clear forms out for clean sequential usage
+        textField.value = '';
+    }
+
+    // Safety function to stop raw layout tags from rendering raw code bugs
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+</script>
+</body>
+
+</html>

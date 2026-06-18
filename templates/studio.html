@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/my_logo_nobg.png') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xavier Beats // Analog Nostalgia Studio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@200;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/studio.css') }}">
+</head>
+<!-- AMBIENT AUDIO UTILITY -->
+<!-- Swap out 'slow-ambient.mp3' with your actual background file name inside your static folder -->
+<audio id="studio-bg-audio" loop src="/static/slow-ambient.mp3"></audio>
+
+<!-- Minimalist Audio Indicator Widget -->
+<div class="audio-status-widget" onclick="toggleAudioExplicitly()">
+    <div class="visualizer-bar bar1"></div>
+    <div class="visualizer-bar bar2"></div>
+    <div class="visualizer-bar bar3"></div>
+    <span id="audio-widget-text">AMBIENT: OFF</span>
+</div>
+
+<body>
+
+    <body>
+        <!-- Sits alone, untouched, running the parallax background mechanics -->
+        <div class="studio-gold-parallax-bg"></div>
+        <!-- Premium Navigation Bar (Logo Restored) -->
+        <header class="studio-nav">
+            <div class="nav-logo">
+                <img src="/static/images/my_logo_nobg.png" alt="Xavier Beats Logo" class="nav-logo-img">
+                <span>XAVIER BEATS</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <a href="#curator-section" class="nav-item">Curator</a>
+                    <a href="#library-section" class="nav-item">Library</a>
+
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home" class="hero-section">
+            <div class="hero-text">
+                <span class="gold-badge">ANALOG CHILLOUT</span>
+                <!-- ADAPTED LOFI WORDS BELOW -->
+                <h1>MOODY TEXTURES.<br>GOLDEN HISS.</h1>
+                <p>Crafting nostalgic lo-fidelity soundscapes, warm analog textures, and gold-standard chillout vibes
+                    from
+                    the underground to the global study playlists.</p>
+                <a href="#library-section" class="cta-btn">LISTEN TO THE LIBRARY</a>
+            </div>
+
+            <!-- The Container where our new 3D JavaScript will render the guitar -->
+            <!-- XAVIER BEATS - SPINNING VINYL SHOWCASE -->
+            <div class="vinyl-deck-wrapper">
+                <div class="vinyl-record">
+                    <!-- Shiny Grooves Texture -->
+                    <div class="vinyl-grooves"></div>
+                    <!-- Center Record Label -->
+                    <div class="vinyl-center-label">
+                        <div class="label-gold-ring">
+                            <span class="label-text">XAVIER BEATS</span>
+                            <div class="center-spindle-hole"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Subtle shadow underneath the record -->
+                <div class="vinyl-floor-shadow"></div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+     SECTION 1: THE CURATOR (ENLARGED PREMIUM BOX WITH CREEPING HOVER PHOTO)
+     ========================================================================== -->
+        <section id="curator-section" class="curator-container-block">
+
+            <div class="curator-luxury-box">
+                <!-- THE CREEPING BACKDROP: Swap 'curator-photo.jpg' with your actual file name -->
+                <div class="curator-box-bg" style="background-image: url('/static/images/me.jpg');"></div>
+
+                <!-- Text layers sitting safely above the image layer -->
+                <div class="curator-box-content">
+                    <h1 class="curator-main-title">THE<br><span class="gold-text">CURATOR</span></h1>
+                    <h3 class="curator-sub-quote">Behind the tape deck, atmosphere is everything.</h3>
+                    <p class="curator-bio-text">
+                        Xavier Beats is a dedicated Lofi producer focused on the intersection of memory and sound.
+                        Fusing deep, moody dark tones with the warmth of gold-standard analog saturation, every track is
+                        tailored to command tranquility.
+                    </p>
+                    <a href="{{ url_for('curator') }}" class="read-more-btn">READ MY STORY →</a>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================================================
+     SECTION 2: LATEST LIBRARY ADDITIONS (PERFECTLY ALIGNED)
+     ========================================================================== -->
+        <section id="library-section" class="library-container-block">
+
+            <!-- Grouped together to keep them safe from screen edges -->
+            <div class="library-header-group">
+                <p class="spotify-label">SPOTIFY SELECTIONS</p>
+                <h2 class="library-main-title">LATEST LIBRARY ADDITIONS</h2>
+            </div>
+
+            <!-- The Luxury Interactive Album Grid -->
+            <div class="latest-additions-grid">
+
+                <!-- ALBUM 1: NATURE'S TALES (The card IS the link now) -->
+                <!-- Added a dark gradient overlay so your white text stays readable over the photo -->
+                <a href="{{ url_for('natures_tales') }}" class="album-card">
+
+                    <div class="album-card-bg"
+                        style="background-image: url('{{ url_for('static', filename='images/natures-tales-cover.jpg') }}');">
+                    </div>
+
+                    <div class="album-card-content">
+                        <h3>Nature's Tales</h3>
+                        <p>ALBUM // 2025 // LOFI</p>
+                    </div>
+
+                </a>
+
+                <a href="{{ url_for('stargazing') }}" class="album-card">
+
+                    <div class="album-card-bg"
+                        style="background-image: url('{{ url_for('static', filename='images/stargazing-cover.jpg') }}');">
+                    </div>
+
+                    <div class="album-card-content">
+                        <h3>Stargazing</h3>
+                        <p>ALBUM // 2025 // CHILLOUT</p>
+                    </div>
+
+                </a>
+
+            </div>
+        </section>
+
+        <!-- !!! IMPORTANT: Loading the 3D Library and our Script at the end !!! -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+        <script src="/static/js/script_3d.js"></script>
+        <script>
+            const studioAudio = document.getElementById('studio-bg-audio');
+            const audioWidget = document.querySelector('.audio-status-widget');
+            const audioText = document.getElementById('audio-widget-text');
+
+            // Lower the default volume to 30% so it acts as gentle, warm background wallpaper music
+            studioAudio.volume = 0.3;
+
+            // AUTOMATION APPARATUS: Triggers audio instantly on the user's very first click anywhere on screen
+            function autoPlayEngine() {
+                if (studioAudio.paused) {
+                    startAudioEffects();
+                }
+                // Immediately removes the listener so future clicks aren't messing with the playback loop
+                document.removeEventListener('click', autoPlayEngine);
+            }
+            document.addEventListener('click', autoPlayEngine);
+
+            function startAudioEffects() {
+                studioAudio.play().then(() => {
+                    audioWidget.classList.add('playing');
+                    audioText.innerText = "AMBIENT: ON";
+                }).catch(err => console.log("Autoplay waiting for custom gesture input event..."));
+            }
+
+            // MANUAL CONTROL: Allows user to click the widget in the corner to toggle sound anytime
+            function toggleAudioExplicitly() {
+                if (studioAudio.paused) {
+                    startAudioEffects();
+                } else {
+                    studioAudio.pause();
+                    audioWidget.classList.remove('playing');
+                    audioText.innerText = "AMBIENT: MUTED";
+                }
+            }
+        </script>
+        <script>
+            // CURSOR TRACKING ENGINE FOR DIM GOLD BACKDROP
+            document.addEventListener('mousemove', (e) => {
+                const goldBg = document.querySelector('.studio-gold-parallax-bg');
+
+                if (goldBg) {
+                    // Find screen midpoint axes
+                    const halfWidth = window.innerWidth / 2;
+                    const halfHeight = window.innerHeight / 2;
+
+                    // Calculate distance offset of cursor from the center
+                    const devianceX = e.clientX - halfWidth;
+                    const devianceY = e.clientY - halfHeight;
+
+                    // Scaled down multiplier (0.012) for an elegant, highly subtle drift effect
+                    const driftX = devianceX * 0.012;
+                    const driftY = devianceY * 0.012;
+
+                    // Update the CSS matrix pipeline in real-time
+                    goldBg.style.transform = `scale(1.06) translate(${driftX}px, ${driftY}px)`;
+                }
+            });
+        </script>
+        <!-- ==========================================================================
+     SECTION 3: STUDIO FOOTER (CONNECT HUB & SESSION TERMINAL)
+     ========================================================================== -->
+        <footer class="studio-layout-container studio-footer-zone">
+            <!-- Luxury hairline accent break -->
+            <hr class="footer-divider">
+
+            <div class="footer-grid">
+                <!-- LEFT COLUMN: SOCIAL HUB -->
+                <div class="footer-connect-block">
+                    <p class="footer-label">Stay Tuned</p>
+                    <h3 class="footer-title">CONNECT WITH XAVIER BEATS</h3>
+                    <div class="social-links-row">
+
+                        <a href="https://www.instagram.com/xavier.btz/" target="_blank"
+                            class="social-link">Instagram</a>
+
+                        <a href="https://open.spotify.com/artist/6uWf3OlMfG3AfqMNeVGdhU?si=pldqDHMJRESheJniV3ccIA"
+                            target="_blank" class="social-link">Spotify</a>
+
+
+                        <a href="https://www.youtube.com/@ProdbyXavier" target="_blank" class="social-link">YouTube</a>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: FLASK ROUTE SYSTEM ACTION -->
+                <div class="footer-session-block">
+                    <p class="footer-label">System Terminal</p>
+                    <!-- Hooks directly into app.route('/logout') in your Python script later -->
+                    <a href="{{ url_for('login') }}" class="logout-action-card">
+                        <span>LOG OUT // EXIT</span>
+                        <span class="logout-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright Tagline -->
+            <div class="footer-copyright">
+                <p>&copy; 2026 XAVIER BEATS. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </body>
+
+</html>

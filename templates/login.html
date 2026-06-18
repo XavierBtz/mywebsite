@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Studio // Access</title>
+    <!-- Importing ultra-clean modern & luxury fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Dark Overlay & Background Picture -->
+    <div class="bg-overlay"></div>
+    <div class="bg-image" style="background-image: url('/static/images/image_2bf7b5.jpg');"></div>
+
+    <!-- Main Login Card -->
+    <!-- Main Login Card -->
+    <div class="login-container" id="loginCard">
+
+        <!-- Only Your Transparent PNG Logo Above the Name -->
+        <div class="logo-wrapper">
+            <img src="/static/images/my_logo_nobg.png" alt="Xavier Studio Logo" class="custom-logo-photo">
+        </div>
+
+        <h1 class="studio-title">Xavier Beats</h1>
+        <p class="studio-subtitle">Enter your name to unlock the studio session.</p>
+
+        <!-- Form linked seamlessly for future Python/Flask integration -->
+        <form action="{{ url_for('process_login') }}" method="POST" class="login-form">
+            <div class="input-group">
+                <input type="text" id="username" name="username" required placeholder=" ">
+                <label for="username">Artist / Listener Name</label>
+                <div class="input-bar"></div>
+            </div>
+
+            <button type="submit" class="enter-btn">
+                <span>ENTER STUDIO</span>
+            </button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
