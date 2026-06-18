@@ -1291,45 +1291,65 @@ body {
 /* ==========================================================================
    HERO LAYOUT & BUTTON MOBILE FIX
    ========================================================================== */
+/* ==========================================================================
+   THE ULTIMATE MOBILE FIX (Replaces all previous attempts)
+   ========================================================================== */
 @media (max-width: 480px) {
 
-    /* 1. STACK THE HERO LAYOUT VERTICALLY */
-    /* Target the container holding your text and vinyl together */
+    /* 1. STACK EVERYTHING VERTICALLY (Text on top, Vinyl on bottom) */
     .hero,
     .hero-container,
     .main-hero-section {
         display: flex !important;
         flex-direction: column !important;
-        /* Changes from side-by-side to top-and-bottom */
         align-items: center !important;
         text-align: center !important;
-        gap: 40px !important;
+        gap: 30px !important;
         padding-top: 40px !important;
     }
 
-    /* 2. RE-CENTER AND ANCHOR THE VINYL */
-    .vinyl-deck-wrapper {
-        position: relative !important;
-        /* Pulls it out of absolute side-floating position */
-        right: auto !important;
-        left: auto !important;
-        margin: 0 auto !important;
-        /* Perfectly centers it horizontally */
+    /* 2. SHRINK THE MASSIVE TEXT */
+    h1,
+    .hero-title,
+    .main-title {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 15px !important;
     }
 
-    /* 3. FIX THE BUTTON SPLITTING */
-    /* Target your CTA button link or class */
+    p,
+    .description-text {
+        font-size: 0.95rem !important;
+        padding: 0 20px !important;
+    }
+
+    /* 3. FIX THE BUTTON (Stop it from breaking in half) */
     .hero a,
     .btn,
     [class*="button"],
     [class*="btn"] {
         white-space: nowrap !important;
-        /* Strict rule: Do NOT let the text wrap to a new line */
+        /* Forces text to stay on one line */
         font-size: 0.8rem !important;
-        /* Shrink text size slightly to fit the viewport width */
         padding: 12px 24px !important;
-        /* Use padding instead of fixed heights to scale the box */
         height: auto !important;
         display: inline-block !important;
+        margin: 0 auto !important;
+    }
+
+    /* 4. PERFECTLY CENTER AND SHRINK THE VINYL */
+    .vinyl-deck-wrapper {
+        position: relative !important;
+        /* Stops it from floating off the side */
+        right: auto !important;
+        left: auto !important;
+        width: 250px !important;
+        height: 250px !important;
+        margin: 20px auto !important;
+    }
+
+    .vinyl-center-label {
+        width: 80px !important;
+        height: 80px !important;
     }
 }
