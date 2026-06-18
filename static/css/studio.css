@@ -1228,3 +1228,62 @@ body {
         height: 80px !important;
     }
 }
+
+/* ==========================================================================
+   COMPLETE MOBILE FIX (FOR PHONES UP TO 480PX WIDE)
+   ========================================================================== */
+@media (max-width: 480px) {
+
+    /* 1. AGGRESSIVELY RESIZE HERO HEADINGS */
+    h1,
+    .hero-title,
+    .main-title {
+        font-size: 2.2rem !important;
+        /* Force the giant text to scale down nicely */
+        line-height: 1.2 !important;
+        letter-spacing: 1px !important;
+        margin-bottom: 15px !important;
+    }
+
+    h2,
+    .section-title {
+        font-size: 1.8rem !important;
+        /* Shrink subheadings like "The Self-Taught Grind" */
+    }
+
+    /* 2. FIX THE TOP NAVIGATION BAR */
+    header,
+    nav,
+    .navbar {
+        padding: 10px 5% !important;
+        /* Reduce massive side paddings */
+        justify-content: space-between !important;
+        gap: 10px !important;
+    }
+
+    /* Target the links inside your navigation */
+    nav a,
+    .nav-link {
+        font-size: 0.8rem !important;
+        /* Shrink text size of HOME, CURATOR, etc. */
+        letter-spacing: 1px !important;
+    }
+
+    /* 3. FIX TEXT CONTAINERS & PADDING ALL OVER THE SITE */
+    .container,
+    .hero-content,
+    .section-container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        /* Prevents containers from pushing past screen bounds */
+    }
+
+    p,
+    .description-text {
+        font-size: 0.95rem !important;
+        /* Make paragraph text slightly more compact for easy scrolling */
+        line-height: 1.6 !important;
+    }
+}
