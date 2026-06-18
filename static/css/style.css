@@ -225,3 +225,16 @@ body {
     filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
     /* enhance the glow */
 }
+
+/* This rule only kicks in on mobile screens */
+@media (max-width: 768px) {
+    .your-big-number-class-name {
+        font-size: 3rem;
+        /* Shrinks the giant text so it doesn't overwhelm */
+        position: relative;
+        /* Lets the paragraphs push it down naturally instead of overlapping */
+        opacity: 0.3;
+        /* Fades it slightly into the background if you want it behind text */
+        margin-bottom: 10px;
+    }
+}
